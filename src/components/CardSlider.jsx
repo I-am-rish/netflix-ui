@@ -2,8 +2,9 @@ import React, { useRef, useState } from "react";
 import Card from "./Card";
 import styled from "styled-components";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import { memo } from "react";
 
-export default React.memo(function CardSlider({ data, title }) {
+const  CardSlider = ({ data, title }) => {
   const [showControls, setShowControls] = useState(false);
   const [sliderPosition, setSliderPosition] = useState(0);
   const listRef = useRef();
@@ -19,6 +20,7 @@ export default React.memo(function CardSlider({ data, title }) {
       setSliderPosition(sliderPosition + 1);
     }
   };
+
 
   return (
     <Container
@@ -50,7 +52,9 @@ export default React.memo(function CardSlider({ data, title }) {
       </div>
     </Container>
   );
-});
+};
+
+export default memo(CardSlider)
 
 
 const Container = styled.div`

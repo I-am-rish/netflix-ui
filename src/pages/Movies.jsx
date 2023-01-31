@@ -9,7 +9,7 @@ import SelectGenre from "../components/SelectGenre";
 import Slider from "../components/Slider";
 import { fetchMovies, getGenres } from "../store";
 
-export default React.memo(function Movies() {
+export default function Movies() {
   const [isScrolled, setIsScrolled] = useState(false);
   const genresLoaded = useSelector((state) => state.netflix.genresLoaded);
   const movies = useSelector((state) => state.netflix.movies);
@@ -30,6 +30,7 @@ export default React.memo(function Movies() {
   };
 
 
+
   return (
     <Container>
       <div className="navbar">
@@ -41,8 +42,7 @@ export default React.memo(function Movies() {
       </div>
     </Container>
   );
-}
-)
+};
 
 
 

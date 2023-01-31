@@ -9,8 +9,10 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies, getGenres } from "../store";
 import Slider from "../components/Slider";
+import { memo } from "react";
 
-export default React.memo(function Netflix(){
+
+const Netflix = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const genresLoaded = useSelector((state) => state.netflix.genresLoaded);
@@ -60,8 +62,9 @@ export default React.memo(function Netflix(){
       <Slider movies={movies}/>
     </Container>
   );
-}
-)
+};
+
+export default  memo(Netflix)
 
 const Container = styled.div`
   background-color: black;

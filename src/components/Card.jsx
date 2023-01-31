@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import video from "../assets/video.mp4";
 import styled from "styled-components";
@@ -13,7 +13,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { removeFromLikedMovies } from "../store";
 
-export default React.memo(function Card({ movieData, isliked = false }){
+const Card = ({ movieData, isliked = false }) => {
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
   const [email, setEmail] = useState(undefined);
@@ -102,8 +102,8 @@ export default React.memo(function Card({ movieData, isliked = false }){
       )}
     </Container>
   );
-}
-)
+};
+export default memo(Card);
 
 
 const Container = styled.div`

@@ -12,13 +12,13 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path='/login' element={<Login />} />
-        <Route exact path='/signup' element={<Signup />} />
-        <Route exact path='player' element={<Player/>}/>
-        <Route exact path='/tv' element={<TVShows/>}/>
-        <Route exact path='/movies' element={<Movies/>}/>
-        <Route exact path='/mylist' element={<UserLiked />}/>
-        <Route exact path='/' element={<Netflix />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
+        <Route path='player' element={<Player/>}/>
+        <Route path='/tv' element={<TVShows/>}/>
+        <Route path='/movies' element={<Movies/>}/>
+        <Route path='/mylist' element={<UserLiked />}/>
+        <Route path='/' element={<Netflix />} />
       </Routes>
     </BrowserRouter>
   )

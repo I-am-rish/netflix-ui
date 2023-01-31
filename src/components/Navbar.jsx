@@ -5,8 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaPowerOff, FaSearch } from "react-icons/fa";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { firebaseAuth } from "../utils/firebase-config";
+import { memo } from "react";
 
-export default React.memo(function Navbar({ isScrolled }){
+const Navbar = ({ isScrolled }) => {
   const navigate = useNavigate();
   const links = [
     { name: "Home", link: "/" },
@@ -22,6 +23,7 @@ export default React.memo(function Navbar({ isScrolled }){
   const [showSearch, setShowSearch] = useState(false);
   const [inputHover, setSInputHover] = useState(false);
 
+
   return (
     <Container>
       <nav className={`flex ${isScrolled ? "scrolled" : ""}`}>
@@ -32,7 +34,7 @@ export default React.memo(function Navbar({ isScrolled }){
           <ul className="links flex">
             {links.map(({name, link}) => {
               return (
-                <li key={name}>
+                <li key={name+1}>
                   <Link to={link}>{name}</Link>
                 </li>
               );
@@ -68,7 +70,8 @@ export default React.memo(function Navbar({ isScrolled }){
     </Container>
   );
 }
-)
+
+export default memo(Navbar); 
 
 const Container = styled.div`
    .scrolled{

@@ -3,13 +3,14 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import BackgroundImage from "../components/BackgroundImage";
 import Header from "../components/Header";
 import { firebaseAuth } from "../utils/firebase-config";
 
 const Login = () => {
+  const[error, setError] = useState(false);
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
     email: "",
@@ -21,6 +22,7 @@ const Login = () => {
       const { email, password } = formValues;
       await signInWithEmailAndPassword(firebaseAuth, email, password);
     } catch (err) {
+      setError(true);
       console.log(err);
     }
   };
@@ -46,27 +48,36 @@ const Login = () => {
                 name="email"
                 value={formValues.email}
                 onChange={(e) =>
-                  setFormValues({
-                    ...formValues,
-                    [e.target.name]: e.target.value,
-                  })
-                }
-              />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  value={formValues.password}
-                  onChange={(e) =>
-                    setFormValues({
+                  setFormValues(
+                    {
                       ...formValues,
                       [e.target.name]: e.target.value,
-                    })
-                  }
-                />
-                <button onClick={handleLogIn} >
-                  Log In
-                </button>
+                    },
+                    setError(false)
+                  )
+                }
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                value={formValues.password}
+                onChange={(e) =>
+                  setFormValues(
+                    {
+                      ...formValues,
+                      [e.target.name]: e.target.value,
+                    },
+                    setError(false)
+                  )
+                }
+              />
+              <button onClick={handleLogIn}>Log In</button>
+              {error && (
+                <p>
+                  user not found, Please <Link to="/signup">Sign Up</Link>
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -112,6 +123,10 @@ const Container = styled.div`
             border-radius: 0.2rem;
             font-weight: bolder;
             font-size: 1.05rem;
+          }
+          p{
+            text-align: center;
+            margin-top: -20px
           }
         }
       }

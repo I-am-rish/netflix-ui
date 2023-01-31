@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 const Player = () => {
   const navigate = useNavigate();
 
+
   return (
     <Container>
       <div className="player">

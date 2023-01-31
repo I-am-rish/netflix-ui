@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar";
 import { getUserLikedMovies } from "../store";
 import { firebaseAuth } from "../utils/firebase-config";
 
-export default React.memo(function UserLiked() {
+export default function UserLiked() {
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const movies = useSelector((state) => state.netflix.movies);
@@ -31,6 +31,7 @@ export default React.memo(function UserLiked() {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
   };
+
 
   return (
     <Container>
@@ -56,7 +57,7 @@ export default React.memo(function UserLiked() {
       </div>
     </Container>
   );
-});
+};
 
 const Container = styled.div`
   .content {

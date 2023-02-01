@@ -26,15 +26,17 @@ const Card = ({ movieData, isliked = false }) => {
 
   const addToList = async () => {
     try {
-      await axios.post("http://localhost:5000/api/user/add", {
-        email,
-        data: movieData,
-      });
+      await axios.post(
+        "https://netflix-server-bc08.onrender.com/api/user/add",
+        {
+          email,
+          data: movieData,
+        }
+      );
     } catch (err) {
       console.log(err);
     }
   };
-
 
   return (
     <Container
@@ -104,7 +106,6 @@ const Card = ({ movieData, isliked = false }) => {
   );
 };
 export default memo(Card);
-
 
 const Container = styled.div`
   max-width: 230px;

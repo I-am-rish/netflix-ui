@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
@@ -17,11 +16,11 @@ const TVShows = () => {
 
   useEffect(() => {
     dispatch(getGenres());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (genresLoaded) dispatch(fetchMovies({ type: "tv" }));
-  }, []);
+  }, [dispatch, genresLoaded]);
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
@@ -42,7 +41,7 @@ const TVShows = () => {
   );
 };
 
-export default memo(TVShows);
+export default TVShows;
 
 const Container = styled.div`
   .data {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import logo from "../assets/logo.png";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaPowerOff, FaSearch } from "react-icons/fa";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { firebaseAuth } from "../utils/firebase-config";
@@ -35,7 +35,7 @@ const Navbar = ({ isScrolled }) => {
             {links.map(({name, link}) => {
               return (
                 <li key={name+1}>
-                  <Link to={link}>{name}</Link>
+                  <NavLink to={link}>{name}</NavLink>
                 </li>
               );
             })}
@@ -102,6 +102,12 @@ const Container = styled.div`
           a{
             color: white;
             text-decoration: none;
+          }
+          /* a.active{
+            visibility:hidden;
+          } */
+          a:active{
+            color: blue;
           }
         }
       }

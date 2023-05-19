@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import backgroundImage from "../assets/home.jpg";
 import MovieLogo from "../assets/homeTitle.webp";
 import { FaPlay } from "react-icons/fa";
@@ -9,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies, getGenres } from "../store";
 import Slider from "../components/Slider";
-import { memo } from "react";
+import Navbar from "../components/Navbar";
 
 
 const Netflix = () => {
@@ -21,11 +20,11 @@ const Netflix = () => {
 
   useEffect(() => {
     dispatch(getGenres());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (genresLoaded) dispatch(fetchMovies({ type: "all" }));
-  }, [genresLoaded]);
+  }, [dispatch, genresLoaded]);
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
@@ -35,7 +34,7 @@ const Netflix = () => {
 
   return (
     <Container>
-      <Navbar isScrolled={isScrolled} />
+      <Navbar isScrolled={isScrolled}/>
       <div className="hero">
         <img
           src={backgroundImage}
@@ -64,7 +63,7 @@ const Netflix = () => {
   );
 };
 
-export default  memo(Netflix)
+export default  Netflix
 
 const Container = styled.div`
   background-color: black;

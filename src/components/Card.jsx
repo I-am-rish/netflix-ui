@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import video from "../assets/video.mp4";
 import styled from "styled-components";
@@ -19,10 +19,12 @@ const Card = ({ movieData, isliked = false }) => {
   const [email, setEmail] = useState(undefined);
   const dispatch = useDispatch();
 
-  onAuthStateChanged(firebaseAuth, (currentUser) => {
-    if (currentUser) setEmail(currentUser.email);
-    else navigate("/login");
-  });
+  useEffect(() => {
+    onAuthStateChanged(firebaseAuth, (currentUser) => {
+      if (currentUser) setEmail(currentUser.email);
+      else navigate("/login");
+    });
+  },[navigate])
 
   const addToList = async () => {
     try {
@@ -105,7 +107,7 @@ const Card = ({ movieData, isliked = false }) => {
     </Container>
   );
 };
-export default memo(Card);
+export default Card;
 
 const Container = styled.div`
   max-width: 230px;

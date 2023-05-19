@@ -1,7 +1,5 @@
-import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import NotAvailable from "../components/NotAvailable";
@@ -18,11 +16,11 @@ export default function Movies() {
 
   useEffect(() => {
     dispatch(getGenres());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
-    if (genresLoaded) dispatch(fetchMovies({ type: "movies" }));
-  }, [genresLoaded]);
+    if (genresLoaded) dispatch(fetchMovies({ type: "movie" }));
+  }, [dispatch, genresLoaded]);
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
